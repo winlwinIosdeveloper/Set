@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		30C8D5E72A55B4870014A28D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C8D5E62A55B4870014A28D /* AppDelegate.swift */; };
 		30C8D5E92A55B4870014A28D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C8D5E82A55B4870014A28D /* SceneDelegate.swift */; };
-		30C8D5EB2A55B4870014A28D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C8D5EA2A55B4870014A28D /* ViewController.swift */; };
+		30C8D5EB2A55B4870014A28D /* SetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C8D5EA2A55B4870014A28D /* SetViewController.swift */; };
 		30C8D5EE2A55B4870014A28D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C8D5EC2A55B4870014A28D /* Main.storyboard */; };
 		30C8D5F02A55B4880014A28D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30C8D5EF2A55B4880014A28D /* Assets.xcassets */; };
 		30C8D5F32A55B4880014A28D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 30C8D5F12A55B4880014A28D /* LaunchScreen.storyboard */; };
@@ -19,7 +19,7 @@
 		30C8D5E32A55B4870014A28D /* Set.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Set.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30C8D5E62A55B4870014A28D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		30C8D5E82A55B4870014A28D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		30C8D5EA2A55B4870014A28D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		30C8D5EA2A55B4870014A28D /* SetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetViewController.swift; sourceTree = "<group>"; };
 		30C8D5ED2A55B4870014A28D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		30C8D5EF2A55B4880014A28D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		30C8D5F22A55B4880014A28D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,15 +56,39 @@
 		30C8D5E52A55B4870014A28D /* Set */ = {
 			isa = PBXGroup;
 			children = (
-				30C8D5E62A55B4870014A28D /* AppDelegate.swift */,
-				30C8D5E82A55B4870014A28D /* SceneDelegate.swift */,
-				30C8D5EA2A55B4870014A28D /* ViewController.swift */,
+				30C8D5FE2A55B4BC0014A28D /* Controller */,
+				30C8D5FD2A55B4B50014A28D /* Model */,
+				30C8D5FB2A55B49E0014A28D /* Supporting */,
 				30C8D5EC2A55B4870014A28D /* Main.storyboard */,
-				30C8D5EF2A55B4880014A28D /* Assets.xcassets */,
-				30C8D5F12A55B4880014A28D /* LaunchScreen.storyboard */,
 				30C8D5F42A55B4880014A28D /* Info.plist */,
 			);
 			path = Set;
+			sourceTree = "<group>";
+		};
+		30C8D5FB2A55B49E0014A28D /* Supporting */ = {
+			isa = PBXGroup;
+			children = (
+				30C8D5E62A55B4870014A28D /* AppDelegate.swift */,
+				30C8D5E82A55B4870014A28D /* SceneDelegate.swift */,
+				30C8D5EF2A55B4880014A28D /* Assets.xcassets */,
+				30C8D5F12A55B4880014A28D /* LaunchScreen.storyboard */,
+			);
+			path = Supporting;
+			sourceTree = "<group>";
+		};
+		30C8D5FD2A55B4B50014A28D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		30C8D5FE2A55B4BC0014A28D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				30C8D5EA2A55B4870014A28D /* SetViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +161,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				30C8D5EB2A55B4870014A28D /* ViewController.swift in Sources */,
+				30C8D5EB2A55B4870014A28D /* SetViewController.swift in Sources */,
 				30C8D5E72A55B4870014A28D /* AppDelegate.swift in Sources */,
 				30C8D5E92A55B4870014A28D /* SceneDelegate.swift in Sources */,
 			);
