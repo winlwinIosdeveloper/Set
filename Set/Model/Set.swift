@@ -8,6 +8,8 @@
 import Foundation
 
 class Set {
+	var deck = Deck()
+	
 	var cards = [Card]()
 	
 	var touchCount = 0 {
@@ -18,6 +20,9 @@ class Set {
 		}
 	}
 
+	
+	
+	// MARK: choose card
 	func chooseCard(at index: Int) {
 		if cards[index].isChoosen {
 			cards[index].isChoosen = false
@@ -29,17 +34,19 @@ class Set {
 	}
 	
 	
+	
+	// MARK: initializer
 	init(numberOfPairOfCards: Int) {
 		for _ in 1...numberOfPairOfCards {
-			let card = Card()
+			let card = deck.drawRendomCard()
 			cards += [card]
 		}
-		
+		cards.shuffle()
 	}
 	
 	
 	
-	
+	// MARK: reset Cards Default
 	private func resetCard() {
 		for index in cards.indices {
 			cards[index].isChoosen = false

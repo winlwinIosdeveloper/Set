@@ -8,15 +8,32 @@
 import UIKit
 
 class SetViewController: UIViewController {
+	let contents = ["diamond":"▲", "oval":"●", "squiggle":"■"]
 	
+	// MARK: Create game
 	lazy var game = Set(numberOfPairOfCards: numberOfPairOfCards)
-
-	@IBOutlet var cardButtons: [UIButton]!
-	
 	var numberOfPairOfCards: Int {
 		return cardButtons.count
 	}
-
+	
+	
+	// set all the button content when loaded
+	@IBOutlet var cardButtons: [UIButton]! {
+		didSet {
+			for index in cardButtons.indices {
+				let count = game.cards[index].number.rawValue
+				let shape = contents[game.cards[index].shape.rawValue]!
+				let color = game.cards[index].color.rawValue
+				let shade = game.cards[index].shade
+				let content = String(repeating: shape, count: count)
+				
+				let button = cardButtons[index]
+				button.setTitle(content, for: UIControl.State.normal)
+				button.setTitleColor(contentColor(name: color), for: UIControl.State.normal)
+			}
+		}
+	}
+	
 	@IBAction func touchCard(_ sender: UIButton) {
 		if let index = cardButtons.firstIndex(of: sender) {
 			game.chooseCard(at: index)
@@ -25,6 +42,8 @@ class SetViewController: UIViewController {
 	}
 
 	
+	
+	// MARK: Update UI
 	private func updateViewFromModel() {
 		for index in cardButtons.indices {
 			let button = cardButtons[index]
@@ -36,6 +55,16 @@ class SetViewController: UIViewController {
 			}
 		}
 	}
+	
+	private func contentColor(name: String) -> UIColor {
+		switch name {
+		case "red":return UIColor.red
+		case "green":return UIColor.green
+		case "purple": return UIColor.purple
+		default:return UIColor.systemBlue
+		}
+	}
+	
 	
 
 }
