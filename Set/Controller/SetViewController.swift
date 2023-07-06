@@ -8,35 +8,33 @@
 import UIKit
 
 class SetViewController: UIViewController {
-	private var touchCount = 0
-
-
+	
+	lazy var game = Set(numberOfPairOfCards: numberOfPairOfCards)
 
 	@IBOutlet var cardButtons: [UIButton]!
 	
-	
-	
-	@IBAction func touchCard(_ sender: UIButton) {
-		if touchCount == 3 {
-			resetCard()
-		}
-		if sender.layer.borderWidth == 0 {
-			sender.layer.borderWidth = 2.0
-			sender.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-			touchCount += 1
-		}
-		else {
-			sender.layer.borderWidth = 0
-			touchCount -= 1
-		}
-		
+	var numberOfPairOfCards: Int {
+		return cardButtons.count
 	}
+
+	@IBAction func touchCard(_ sender: UIButton) {
+		if let index = cardButtons.firstIndex(of: sender) {
+			game.chooseCard(at: index)
+			updateViewFromModel()
+		}	
+	}
+
 	
-	private func resetCard() {
-		for cardButton in cardButtons {
-			cardButton.layer.borderWidth = 0
+	private func updateViewFromModel() {
+		for index in cardButtons.indices {
+			let button = cardButtons[index]
+			if game.cards[index].isChoosen {
+				button.layer.borderWidth = 2.0
+				button.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+			} else {
+				button.layer.borderWidth = 0
+			}
 		}
-		touchCount = 0
 	}
 	
 
