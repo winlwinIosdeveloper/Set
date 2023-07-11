@@ -15,7 +15,19 @@ class Set {
 	var touchCount = 0 {
 		didSet {
 			if touchCount == 3 {
-				resetCard()
+				if isSet(cards) {
+					let indices = cards.indices.filter {
+						cards[$0].isChoosen
+					}
+					cards[indices[0]].isSet = true
+					cards[indices[1]].isSet = true
+					cards[indices[2]].isSet = true
+					print("Set")
+					//resetCard()
+				}
+				else {
+					resetCard()
+				}
 			}
 		}
 	}
@@ -53,4 +65,38 @@ class Set {
 		}
 		touchCount = 0
 	}
+	
+	
+	func isSet(_ cards: [Card]) -> Bool {
+		// Check if the number attribute is all the same or all different
+		let choosenCards = cards.indices.filter {
+			cards[$0].isChoosen
+		}
+		
+		let first = choosenCards[0]
+		let second = choosenCards[1]
+		let third = choosenCards[2]
+		
+		
+		
+		// These part of implementation is from chatGPT
+		let isNumberSet = (cards[first].number == cards[second].number && cards[second].number == cards[third].number) ||
+						  (cards[first].number != cards[second].number && cards[second].number != cards[third].number && cards[first].number != cards[third].number)
+
+		// Check if the symbol attribute is all the same or all different
+		let isSymbolSet = (cards[first].shape == cards[second].shape && cards[second].shape == cards[third].shape) ||
+						  (cards[first].shape != cards[second].shape && cards[second].shape != cards[third].shape && cards[first].shape != cards[third].shape)
+
+		// Check if the shading attribute is all the same or all different
+		let isShadingSet = (cards[first].shade == cards[second].shade && cards[second].shade == cards[third].shade) ||
+						   (cards[first].shade != cards[second].shade && cards[second].shade != cards[third].shade && cards[first].shade != cards[third].shade)
+
+		// Check if the color attribute is all the same or all different
+		let isColorSet = (cards[first].color == cards[second].color && cards[second].color == cards[third].color) ||
+						 (cards[first].color != cards[second].color && cards[second].color != cards[third].color && cards[first].color != cards[third].color)
+
+		// Return true if all attributes satisfy the set conditions, false otherwise
+		return isNumberSet && isSymbolSet && isShadingSet && isColorSet
+	}
+
 }

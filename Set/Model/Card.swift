@@ -16,6 +16,7 @@ struct Card {
 	var shade: Shade
 	
 	var isChoosen = false
+	var isSet = false
 	
 	enum Shape: String, CaseIterable {
 		case diamond
@@ -36,7 +37,7 @@ struct Card {
 	}
 	
 	// solid, striped, open
-	enum Shade: CaseIterable {
+	enum Shade: String, CaseIterable {
 		case solid
 		case stripe
 		case open
