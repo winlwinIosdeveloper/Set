@@ -16,24 +16,44 @@ class SetViewController: UIViewController {
 		return cardButtons.count
 	}
 	
-	
-	// set all the button content when loaded
-	@IBOutlet var cardButtons: [UIButton]! {
+	var dealCard = 12 {
 		didSet {
-			for index in cardButtons.indices {
-				let count = game.cards[index].number.rawValue
-				let shape = contents[game.cards[index].shape.rawValue]!
-				let color = game.cards[index].color.rawValue
-				let shade = game.cards[index].shade.rawValue
-				let content = String(repeating: shape, count: count)
-				let button = cardButtons[index]
-				// add necessory attribute to the button title
-				attributedTextOnButton(button: button, count: count, shape: shape, color: color, shade: shade, content: content)
+			for index in 0..<dealCard {
+				if dealCard <= cardButtons.count, cardButtons[index].isHidden {
+					cardButtons[index].isHidden = false
+					print(dealCard)
+				}
 			}
 		}
 	}
 	
 	
+	
+	// set all the button content when loaded
+	@IBOutlet var cardButtons: [UIButton]! {
+		didSet {
+			loadCardButtons()
+		}
+	}
+	
+	
+	
+	@IBAction func DealThreeMoreCard() {
+		dealCard += 3
+	}
+	
+	private func loadCardButtons() {
+		for index in cardButtons.indices {
+			let count = game.cards[index].number.rawValue
+			let shape = contents[game.cards[index].shape.rawValue]!
+			let color = game.cards[index].color.rawValue
+			let shade = game.cards[index].shade.rawValue
+			let content = String(repeating: shape, count: count)
+			let button = cardButtons[index]
+			// add necessory attribute to the button title
+			attributedTextOnButton(button: button, count: count, shape: shape, color: color, shade: shade, content: content)
+		}
+	}
 	
 	@IBAction func touchCard(_ sender: UIButton) {
 		if let index = cardButtons.firstIndex(of: sender) {
@@ -50,23 +70,9 @@ class SetViewController: UIViewController {
 		for index in cardButtons.indices {
 			let button = cardButtons[index]
 			
-			let setIndices = game.cards.indices.filter {
-				game.cards[$0].isSet
-			}
-			
 			if game.cards[index].isChoosen {
 				button.layer.borderWidth = 2.0
 				button.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-			}
-			else if setIndices.count == 3 {
-				cardButtons[setIndices[0]].layer.borderWidth = 5.0
-				cardButtons[setIndices[0]].layer.borderColor = #colorLiteral(red: 0.5563425422, green: 0.9793455005, blue: 0, alpha: 1)
-				
-				cardButtons[setIndices[1]].layer.borderWidth = 5.0
-				cardButtons[setIndices[1]].layer.borderColor = #colorLiteral(red: 0.5563425422, green: 0.9793455005, blue: 0, alpha: 1)
-				
-				cardButtons[setIndices[2]].layer.borderWidth = 5.0
-				cardButtons[setIndices[2]].layer.borderColor = #colorLiteral(red: 0.5563425422, green: 0.9793455005, blue: 0, alpha: 1)
 			}
 			else {
 				button.layer.borderWidth = 0

@@ -15,21 +15,10 @@ class Set {
 	var touchCount = 0 {
 		didSet {
 			if touchCount == 3 {
-				if isSet(cards) {
-					let indices = cards.indices.filter {
-						cards[$0].isChoosen
-					}
-					cards[indices[0]].isSet = true
-					cards[indices[1]].isSet = true
-					cards[indices[2]].isSet = true
-					print("Set")
-					//resetCard()
-				}
-				else {
-					resetCard()
-				}
+				resetCard()
 			}
 		}
+
 	}
 
 	
@@ -54,6 +43,8 @@ class Set {
 			cards += [card]
 		}
 		cards.shuffle()
+		print(cards.count)
+		print(deck.deck.count)
 	}
 	
 	
@@ -73,11 +64,8 @@ class Set {
 			cards[$0].isChoosen
 		}
 		
-		let first = choosenCards[0]
-		let second = choosenCards[1]
-		let third = choosenCards[2]
-		
-		
+		let (first, second, third) = (choosenCards[0], choosenCards[1], choosenCards[2])
+			
 		
 		// These part of implementation is from chatGPT
 		let isNumberSet = (cards[first].number == cards[second].number && cards[second].number == cards[third].number) ||
@@ -97,6 +85,10 @@ class Set {
 
 		// Return true if all attributes satisfy the set conditions, false otherwise
 		return isNumberSet && isSymbolSet && isShadingSet && isColorSet
+	}
+	
+	private func dealThreeMoreCard() {
+		cards += [deck.drawRendomCard(), deck.drawRendomCard(), deck.drawRendomCard()]
 	}
 
 }
