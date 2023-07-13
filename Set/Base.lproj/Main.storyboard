@@ -248,6 +248,7 @@
                         <color key="backgroundColor" red="0.0" green="0.56284224989999998" blue="0.31881666180000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="threeMoreCardButton" destination="TLH-ZE-iRf" id="dUw-gi-Krs"/>
                         <outletCollection property="cardButtons" destination="51v-o5-Myu" collectionClass="NSMutableArray" id="Pbx-0I-QF5"/>
                         <outletCollection property="cardButtons" destination="HI0-3e-weQ" collectionClass="NSMutableArray" id="TBp-Lp-Dey"/>
                         <outletCollection property="cardButtons" destination="vhy-SL-dHz" collectionClass="NSMutableArray" id="Ffv-Er-jfd"/>

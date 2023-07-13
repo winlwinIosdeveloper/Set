@@ -16,7 +16,6 @@ struct Card {
 	var shade: Shade
 	
 	var isChoosen = false
-	var isSet = false
 	
 	enum Shape: String, CaseIterable {
 		case diamond

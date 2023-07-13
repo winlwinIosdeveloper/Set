@@ -15,7 +15,20 @@ class Set {
 	var touchCount = 0 {
 		didSet {
 			if touchCount == 3 {
-				resetCard()
+				if isSet(cards) {
+					let indices = cards.indices.filter {
+						cards[$0].isChoosen
+					}
+					let (first, second, third) = (indices[0], indices[1], indices[2])
+					print("SET")
+					dealThreeMoreCard(indexOne: first, indexTwo: second, indexThree: third)
+
+					resetCard()
+					
+					
+				} else {
+					resetCard()
+				}
 			}
 		}
 
@@ -43,8 +56,8 @@ class Set {
 			cards += [card]
 		}
 		cards.shuffle()
-		print(cards.count)
-		print(deck.deck.count)
+		print("CARD \(cards.count)")
+		print("DECK \(deck.deck.count)")
 	}
 	
 	
@@ -87,8 +100,12 @@ class Set {
 		return isNumberSet && isSymbolSet && isShadingSet && isColorSet
 	}
 	
-	private func dealThreeMoreCard() {
-		cards += [deck.drawRendomCard(), deck.drawRendomCard(), deck.drawRendomCard()]
+	private func dealThreeMoreCard(indexOne: Int, indexTwo: Int, indexThree: Int) {
+		cards[indexOne] = deck.drawRendomCard()
+		cards[indexTwo] = deck.drawRendomCard()
+		cards[indexThree] = deck.drawRendomCard()
+		print("CARD \(cards.count)")
+		print("DECK \(deck.deck.count)")
 	}
 
 }

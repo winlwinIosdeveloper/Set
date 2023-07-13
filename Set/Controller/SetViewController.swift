@@ -15,17 +15,7 @@ class SetViewController: UIViewController {
 	var numberOfPairOfCards: Int {
 		return cardButtons.count
 	}
-	
-	var dealCard = 12 {
-		didSet {
-			for index in 0..<dealCard {
-				if dealCard <= cardButtons.count, cardButtons[index].isHidden {
-					cardButtons[index].isHidden = false
-					print(dealCard)
-				}
-			}
-		}
-	}
+
 	
 	
 	
@@ -38,10 +28,76 @@ class SetViewController: UIViewController {
 	
 	
 	
+	// MARK: Deal 3 more cards
 	@IBAction func DealThreeMoreCard() {
-		dealCard += 3
+		dealCardCounts += 3
+	}
+	@IBOutlet weak var threeMoreCardButton: UIButton! {
+		didSet {
+			threeMoreCardButton.layer.cornerRadius = 5.0
+		}
+	}
+	var dealCardCounts = 12 {
+		didSet {
+			if dealCardCounts == cardButtons.count {
+				threeMoreCardButton.isHidden = true
+			}
+			for index in 0..<dealCardCounts {
+				if dealCardCounts <= cardButtons.count, cardButtons[index].isHidden {
+					cardButtons[index].isHidden = false
+					print(dealCardCounts)
+				}
+			}
+		}
 	}
 	
+	
+	// MARK: Touch Card
+	@IBAction func touchCard(_ sender: UIButton) {
+		if let index = cardButtons.firstIndex(of: sender) {
+			game.chooseCard(at: index)
+			print(game.cards[index])
+			updateViewFromModel()
+		}	
+	}
+	
+	
+	
+	// MARK: Update UI
+	private func updateViewFromModel() {
+		loadCardButtons()
+		for index in cardButtons.indices {
+			let button = cardButtons[index]
+			if game.cards[index].isChoosen {
+				button.layer.borderWidth = 2.0
+				button.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+			} else {
+				button.layer.borderWidth = 0.0
+			}
+		}
+	}
+		
+
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+extension SetViewController {
 	private func loadCardButtons() {
 		for index in cardButtons.indices {
 			let count = game.cards[index].number.rawValue
@@ -55,51 +111,7 @@ class SetViewController: UIViewController {
 		}
 	}
 	
-	@IBAction func touchCard(_ sender: UIButton) {
-		if let index = cardButtons.firstIndex(of: sender) {
-			game.chooseCard(at: index)
-			updateViewFromModel()
-		}	
-	}
 	
-	
-	
-	// MARK: Update UI
-	private func updateViewFromModel() {
-		
-		for index in cardButtons.indices {
-			let button = cardButtons[index]
-			
-			if game.cards[index].isChoosen {
-				button.layer.borderWidth = 2.0
-				button.layer.borderColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-			}
-			else {
-				button.layer.borderWidth = 0
-			}
-		}
-	}
-	
-	private func contentColor(name: String) -> UIColor {
-		switch name {
-		case "red":return UIColor.red
-		case "green":return UIColor.green
-		case "purple": return UIColor.purple
-		default:return UIColor.systemBlue
-		}
-	}
-}
-
-
-
-
-
-
-
-
-
-
-extension SetViewController {
 	private func attributedTextOnButton(button: UIButton, count: Int, shape: String, color: String, shade: String, content: String) {
 		switch shade {
 		case "solid":
@@ -125,6 +137,16 @@ extension SetViewController {
 			button.setTitle("?", for: UIControl.State.normal)
 			button.setTitleColor(contentColor(name: "black").withAlphaComponent(1), for: UIControl.State.normal)
 			button.layer.cornerRadius = 5.0;
+		}
+	}
+	
+	
+	private func contentColor(name: String) -> UIColor {
+		switch name {
+		case "red":return UIColor.red
+		case "green":return UIColor.green
+		case "purple": return UIColor.purple
+		default:return UIColor.systemBlue
 		}
 	}
 }
